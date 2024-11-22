@@ -1,21 +1,31 @@
 <script>
+import store from "./store/store";
 import productCard from "./components/productCard.vue";
+import cartMenu from "./components/cartMenu.vue";
+import AppTop from './components/AppTop.vue';
 export default {
   components: {
-    productCard
+    productCard,
+    cartMenu,
+    AppTop
   },
   data() {
     return {
-      
+      storeState: store.state
     }
   }
 }
 </script>
 
 <template>
-  <div class="container">
-    <div class="crds-wrp flex flex-wrap justify-center gap-[25px]">
-      <productCard v-for="item in 20" :key="item"/>
+  <div class="app mt-[20px]">
+    <div class="container">
+      <AppTop />
+      <cartMenu />
+
+      <div class="crds-wrp flex flex-wrap justify-center gap-[25px] mt-[20px]">
+        <productCard v-for="item in 20" :key="item" :index="item" />
+      </div>
     </div>
   </div>
 </template>
@@ -24,12 +34,13 @@ export default {
 html {
   background: #fff;
 }
+
 .container {
   width: 100%;
   max-width: 1240px;
   margin: 0 auto;
   padding: 0 20px;
-  
+
 }
 
 @media screen and (max-width: 500px) {
@@ -37,6 +48,7 @@ html {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
+    justify-content: center;
   }
 }
 </style>
