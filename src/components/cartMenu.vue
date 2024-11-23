@@ -45,7 +45,7 @@
                                   <p class="text-gray-500">Qty {{ product.quantity }}</p>
   
                                   <div class="flex">
-                                    <button type="button" class="font-medium text-red-600 hover:text-red-500">Remove</button>
+                                    <button type="button" class="font-medium text-red-600 hover:text-red-500" @click="removeProduct(product)">Remove</button>
                                   </div>
                                 </div>
                               </div>
@@ -86,6 +86,7 @@
   
   <script>
  import {useStore} from "../store/store"
+ import {removeItem} from "../composables/removeItem"
   import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue';
   import { XMarkIcon } from '@heroicons/vue/24/outline';
   
@@ -128,7 +129,14 @@
       };
     },
 
+    methods: {
+      removeProduct(item) {
+        removeItem(item)
+      }
+    },
+
     mounted() {
+
     }
   };
   </script>  
