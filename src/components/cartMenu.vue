@@ -1,6 +1,6 @@
 <template>
-    <TransitionRoot as="template" :show="open">
-      <Dialog class="relative z-10" @close="open = false">
+    <TransitionRoot as="template" :show="store.cartShow">
+      <Dialog class="relative z-10" @close="store.cartShow = false">
         <TransitionChild as="template" enter="ease-in-out duration-500" enter-from="opacity-0" enter-to="opacity-100" leave="ease-in-out duration-500" leave-from="opacity-100" leave-to="opacity-0">
           <div class="fixed inset-0 bg-gray-500/75 transition-opacity" />
         </TransitionChild>
@@ -15,7 +15,7 @@
                       <div class="flex items-start justify-between">
                         <DialogTitle class="text-lg font-medium text-gray-900">Shopping cart</DialogTitle>
                         <div class="ml-3 flex h-7 items-center">
-                          <button type="button" class="relative -m-2 p-2 text-gray-400 hover:text-gray-500" @click="open = false">
+                          <button type="button" class="relative -m-2 p-2 text-gray-400 hover:text-gray-500" @click="store.cartShow = false">
                             <span class="absolute -inset-0.5" />
                             <span class="sr-only">Close panel</span>
                             <XMarkIcon class="size-6" aria-hidden="true" />
@@ -67,7 +67,7 @@
                       <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
                         <p>
                           or{{ ' ' }}
-                          <button type="button" class="font-medium text-black" @click="open = false">
+                          <button type="button" class="font-medium text-black" @click="store.cartShow = false">
                             Continue Shopping
                             <span aria-hidden="true"> &rarr;</span>
                           </button>
@@ -84,35 +84,51 @@
     </TransitionRoot>
   </template>
   
-  <script setup>
-  import { ref } from 'vue'
-  import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
-  import { XMarkIcon } from '@heroicons/vue/24/outline'
+  <script>
+ import {useStore} from "../store/store"
+  import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue';
+  import { XMarkIcon } from '@heroicons/vue/24/outline';
   
-  const products = [
-    {
-      id: 1,
-      name: 'Throwback Hip Bag',
-      href: '#',
-      color: 'Salmon',
-      price: '$90.00',
-      quantity: 1,
-      imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/shopping-cart-page-04-product-01.jpg',
-      imageAlt: 'Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.',
+  export default {
+    components: {
+      Dialog,
+      DialogPanel,
+      DialogTitle,
+      TransitionChild,
+      TransitionRoot,
+      XMarkIcon,
     },
-    {
-      id: 2,
-      name: 'Medium Stuff Satchel',
-      href: '#',
-      color: 'Blue',
-      price: '$32.00',
-      quantity: 1,
-      imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
-      imageAlt:
-        'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
+
+    data() {
+      return { 
+        store: useStore(),
+        products: [
+          {
+            id: 1,
+            name: 'Throwback Hip Bag',
+            href: '#',
+            color: 'Salmon',
+            price: '$90.00',
+            quantity: 1,
+            imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/shopping-cart-page-04-product-01.jpg',
+            imageAlt: 'Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.',
+          },
+          {
+            id: 2,
+            name: 'Medium Stuff Satchel',
+            href: '#',
+            color: 'Blue',
+            price: '$32.00',
+            quantity: 1,
+            imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
+            imageAlt: 'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
+          },
+          // More products...
+        ],
+      };
     },
-    // More products...
-  ]
-  
-  const open = ref(true)
-  </script>
+
+    mounted() {
+    }
+  };
+  </script>  

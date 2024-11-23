@@ -1,5 +1,5 @@
 <script>
-import store from "./store/store";
+// import store from "./store/store";
 import productCard from "./components/productCard.vue";
 import cartMenu from "./components/cartMenu.vue";
 import AppTop from './components/AppTop.vue';
@@ -10,8 +10,7 @@ export default {
     AppTop
   },
   data() {
-    return {
-      storeState: store.state
+    return { 
     }
   }
 }
