@@ -11,7 +11,20 @@ export default {
   },
   data() {
     return { 
+      products: {}
     }
+  },
+
+  methods: {
+    getProduct() {
+      fetch("https://api.escuelajs.co/api/v1/products").then((res)=> res.json()).then((data)=>  {
+        this.products = data
+      })
+    }
+  },
+
+  mounted() {
+    this.getProduct()
   }
 }
 </script>
@@ -23,7 +36,7 @@ export default {
       <cartMenu />
 
       <div class="crds-wrp flex flex-wrap justify-center gap-[25px] mt-[20px]">
-        <productCard v-for="item in 20" :key="item" :index="item" />
+        <productCard v-for="item in products" :key="item" :product="item" />
       </div>
     </div>
   </div>
