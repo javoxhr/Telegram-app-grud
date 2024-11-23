@@ -1,5 +1,5 @@
 <script>
-// import store from "./store/store";
+import {useStore} from './store/store'
 import productCard from "./components/productCard.vue";
 import cartMenu from "./components/cartMenu.vue";
 import AppTop from './components/AppTop.vue';
@@ -11,7 +11,8 @@ export default {
   },
   data() {
     return { 
-      products: {}
+      products: {},
+      store: useStore()
     }
   },
 

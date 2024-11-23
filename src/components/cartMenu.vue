@@ -26,18 +26,18 @@
                       <div class="mt-8">
                         <div class="flow-root">
                           <ul role="list" class="-my-6 divide-y divide-gray-200">
-                            <li v-for="product in products" :key="product.id" class="flex py-6">
+                            <li v-for="product in store.cart" :key="product.id" class="flex py-6">
                               <div class="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                <img :src="product.imageSrc" :alt="product.imageAlt" class="size-full object-cover" />
+                                <img :src="product.image" :alt="product.imageAlt" class="size-full object-cover" />
                               </div>
   
                               <div class="ml-4 flex flex-1 flex-col">
                                 <div>
                                   <div class="flex justify-between text-base font-medium text-gray-900">
                                     <h3>
-                                      <a :href="product.href">{{ product.name }}</a>
+                                      <a :href="product.href">{{ product.title }}</a>
                                     </h3>
-                                    <p class="ml-4">{{ product.price }}</p>
+                                    <p class="ml-4">${{ product.price }}</p>
                                   </div>
                                   <p class="mt-1 text-sm text-gray-500">{{ product.color }}</p>
                                 </div>
