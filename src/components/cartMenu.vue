@@ -23,6 +23,16 @@ export default {
     };
   },
 
+  computed: {
+    totalPrice() {
+      let total = 0
+      this.store.cart.forEach((el)=> {
+        total += el.price * el.quantity
+      })
+      return total
+    }
+  },
+
   methods: {
     removeProduct(item) {
       removeItem(item)
@@ -91,7 +101,7 @@ export default {
                                   <h3>
                                     <a :href="product.href">{{ product.title }}</a>
                                   </h3>
-                                  <p class="ml-4">${{ product.price }}</p>
+                                  <p class="ml-4">${{ product.price * product.quantity }}</p>
                                 </div>
                                 <p class="mt-1 text-sm text-gray-500">{{ product.color }}</p>
                               </div>
@@ -120,7 +130,7 @@ export default {
                   <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
                     <div class="flex justify-between text-base font-medium text-gray-900">
                       <p>Subtotal</p>
-                      <p>$262.00</p>
+                      <p>$ {{ totalPrice }}</p>
                     </div>
                     <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                     <div class="mt-6">
