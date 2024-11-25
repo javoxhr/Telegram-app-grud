@@ -1,13 +1,13 @@
 <script>
 import { useStore } from "../store/store";
 import { addToCart } from "../composables/addToCart";
-import { addQuanProduct} from "../composables/addQuantity"
+import { addQuanProduct } from "../composables/addQuantity"
 import { remQuantity } from "../composables/remQuantity";
 import notImg from "../assets/images/jpg/not-img.jpg"
 export default {
     props: {
         product: {
-           type: Object
+            type: Object
         }
     },
     data() {
@@ -27,10 +27,8 @@ export default {
         checkCart() {
             const item = this.store.cart.find((el) => el.id == this.product.id);
             if (item) {
-                console.log(true)
                 return item;
             } else {
-                console.log(false)
                 return false;
             }
         }
@@ -53,7 +51,7 @@ export default {
 
 <template>
     <div>
-        <div class="product flex flex-col items-start w-44 rounded-xl p-4 relative"
+        <div class="product w-full flex flex-col items-start w-44 rounded-xl p-4 relative"
             style="box-shadow: 1px 3px 7px 5px #ececec;">
             <div class="image-wrap flex items-center justify-center w-full">
                 <img class="item-img w-24" v-if="product?.images[1]" :src="product?.images[0]" alt="">
@@ -68,10 +66,12 @@ export default {
                 <img src="../assets/images/svg/cart-icon-white.svg" alt="">
             </button>
 
-            <div class="btns-add-and-rem-quan flex items-center gap-[11px] mt-[17px] pb-[4px]" v-if="checkCart">
-                <button @click="addQuan(product)" class="pb-[4px] font-medium text-[25px] active:opacity-80 rounded-[3px] h-[32px] w-[50px] flex items-center justify-center bg-black text-white">+</button>
+            <div class="btns-add-and-rem-quan flex items-center w-full gap-[11px] mt-[17px] pb-[4px]" v-if="checkCart">
+                <button @click="remQuan(product)"
+                    class="pb-[4px] font-medium text-[25px] rounded-[3px] h-[32px] w-[100%] flex items-center justify-center bg-black text-white active:opacity-80">-</button>
                 <span class="font-medium text-center text-[18px] w-[20px]">{{ checkCart?.quantity }}</span>
-                <button @click="remQuan(product)" class="pb-[4px] font-medium text-[25px] rounded-[3px] h-[32px] w-[50px] flex items-center justify-center bg-black text-white active:opacity-80">-</button>
+                <button @click="addQuan(product)"
+                    class="pb-[4px] font-medium text-[25px] active:opacity-80 rounded-[3px] h-[32px] w-[100%] flex items-center justify-center bg-black text-white">+</button>
             </div>
         </div>
     </div>
@@ -98,8 +98,15 @@ export default {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .product {
+        padding: 10px;
     }
 }
 </style>

@@ -1,3 +1,48 @@
+<script>
+import { useStore } from "../store/store"
+import { removeItem } from "../composables/removeItem"
+import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue';
+import { XMarkIcon } from '@heroicons/vue/24/outline';
+
+import { addQuanProduct } from "../composables/addQuantity"
+import { remQuantity } from "../composables/remQuantity";
+
+export default {
+  components: {
+    Dialog,
+    DialogPanel,
+    DialogTitle,
+    TransitionChild,
+    TransitionRoot,
+    XMarkIcon,
+  },
+
+  data() {
+    return {
+      store: useStore(),
+    };
+  },
+
+  methods: {
+    removeProduct(item) {
+      removeItem(item)
+    },
+
+    addQuan(item) {
+            addQuanProduct(item)
+        },
+
+        remQuan(item) {
+            remQuantity(item)
+        }
+  },
+
+  mounted() {
+
+  }
+};
+</script>
+
 <template>
   <TransitionRoot as="template" :show="store.cartShow">
     <Dialog class="relative z-10" @close="store.cartShow = false">
@@ -32,8 +77,7 @@
                     <div class="mt-8">
                       <div class="flow-root">
                         <ul role="list" class="-my-6 divide-y divide-gray-200">
-                          <h2 v-if="!store.cart.length"
-                            class="text-[20px] text-center mt-[60%]">
+                          <h2 v-if="!store.cart.length" class="text-[20px] text-center mt-[60%]">
                             Not product in cart
                           </h2>
                           <li v-for="product in store.cart" :key="product.id" class="flex py-6">
@@ -51,9 +95,16 @@
                                 </div>
                                 <p class="mt-1 text-sm text-gray-500">{{ product.color }}</p>
                               </div>
+                              <div class="btns-add-and-rem-quan flex items-center gap-[8px] pb-[4px]">
+                                <button
+                                  class="pb-[7px] font-medium text-[25px] rounded-[3px] h-[20px] w-[35px] flex items-center justify-center bg-black text-white active:opacity-80" @click="remQuan(product)">-</button>
+                                <span class="font-medium text-center text-[15px] w-[20px]">{{ product.quantity
+                                  }}</span>
+                                <button
+                                  class="pb-[4px] font-medium text-[20px] active:opacity-80 rounded-[3px] h-[20px] w-[35px] flex items-center justify-center bg-black text-white" @click="addQuan(product)">+</button>
+                              </div>
                               <div class="flex flex-1 items-end justify-between text-sm">
                                 <p class="text-gray-500">Qty {{ product.quantity }}</p>
-
                                 <div class="flex">
                                   <button type="button" class="font-medium text-red-600 hover:text-red-500"
                                     @click="removeProduct(product)">Remove</button>
@@ -95,60 +146,3 @@
     </Dialog>
   </TransitionRoot>
 </template>
-
-<script>
-import { useStore } from "../store/store"
-import { removeItem } from "../composables/removeItem"
-import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue';
-import { XMarkIcon } from '@heroicons/vue/24/outline';
-
-export default {
-  components: {
-    Dialog,
-    DialogPanel,
-    DialogTitle,
-    TransitionChild,
-    TransitionRoot,
-    XMarkIcon,
-  },
-
-  data() {
-    return {
-      store: useStore(),
-      products: [
-        {
-          id: 1,
-          name: 'Throwback Hip Bag',
-          href: '#',
-          color: 'Salmon',
-          price: '$90.00',
-          quantity: 1,
-          imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/shopping-cart-page-04-product-01.jpg',
-          imageAlt: 'Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.',
-        },
-        {
-          id: 2,
-          name: 'Medium Stuff Satchel',
-          href: '#',
-          color: 'Blue',
-          price: '$32.00',
-          quantity: 1,
-          imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
-          imageAlt: 'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
-        },
-        // More products...
-      ],
-    };
-  },
-
-  methods: {
-    removeProduct(item) {
-      removeItem(item)
-    }
-  },
-
-  mounted() {
-
-  }
-};
-</script>

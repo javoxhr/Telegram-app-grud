@@ -1,5 +1,5 @@
 <script>
-import {useStore} from './store/store'
+import { useStore } from './store/store'
 import productCard from "./components/productCard.vue";
 import cartMenu from "./components/cartMenu.vue";
 import AppTop from './components/AppTop.vue';
@@ -10,7 +10,7 @@ export default {
     AppTop
   },
   data() {
-    return { 
+    return {
       products: {},
       store: useStore()
     }
@@ -18,7 +18,7 @@ export default {
 
   methods: {
     getProduct() {
-      fetch("https://api.escuelajs.co/api/v1/products").then((res)=> res.json()).then((data)=>  {
+      fetch("https://api.escuelajs.co/api/v1/products").then((res) => res.json()).then((data) => {
         this.products = data
       })
     }
@@ -56,8 +56,15 @@ html {
 
 }
 
+.crds-wrp {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+}
+
 @media screen and (max-width: 500px) {
   .crds-wrp {
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
