@@ -12,7 +12,7 @@ export default {
 
 <template>
     <div>
-        <h1 class="text-[30px] text-center pb-[10px] mt-[-10px]">Web App Name</h1>
+        <h1 class="text-[30px] text-center pb-[20px] mt-[-10px] font-medium">Web App Name</h1>
         <div class="category-and-cart-btn-wrapper flex items-center justify-between">
             <div class="category-btns-wrapper flex items-center gap-[10px]">
                 <button class="p-[5px] bg-black text-white border-2 border-black rounded-[5px]">Clothers</button>
