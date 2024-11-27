@@ -44,7 +44,11 @@ export default {
 
         remQuan(item) {
             remQuantity(item)
-        }
+        },
+
+        errorImg(event) {
+            event.target.src = this.notImg;
+        },
     },
 }
 </script>
@@ -54,8 +58,9 @@ export default {
         <div class="product w-full flex flex-col items-start w-44 rounded-xl p-4 relative"
             style="box-shadow: 1px 3px 7px 5px #ececec;">
             <div class="image-wrap flex items-center justify-center w-full">
-                <img class="item-img w-24" v-if="product?.images[1]" :src="product?.images[0]" alt="">
-                <img class="item-img w-24" v-if="!product?.images[1]" :src="notImg" alt="">
+                <img class="item-img w-24" v-if="product?.images[1]" :src="product?.images[0]" alt=""
+                    @error="errorImg" />
+                <img class="item-img w-24" v-else src="../assets/images/jpg/not-img.jpg" alt="" @error="onImageError" />
             </div>
             <div class="text-wrapper flex flex-col gap-1 mt-2">
                 <h3 class="product-title text-[20px] font-medium">{{ product?.title }}</h3>
@@ -88,6 +93,7 @@ export default {
 .item-img {
     width: 100%;
     border-radius: 6px;
+    height: 156px;
 }
 
 .btns-add-and-rem-quan {

@@ -1,45 +1,17 @@
 <script>
-import { useStore } from './store/store'
-import productCard from "./components/productCard.vue";
-import cartMenu from "./components/cartMenu.vue";
-import AppTop from './components/AppTop.vue';
 export default {
-  components: {
-    productCard,
-    cartMenu,
-    AppTop
-  },
   data() {
     return {
-      products: {},
-      store: useStore()
+      
     }
-  },
-
-  methods: {
-    getProduct() {
-      fetch("https://api.escuelajs.co/api/v1/products").then((res) => res.json()).then((data) => {
-        this.products = data
-      })
-    }
-  },
-
-  mounted() {
-    this.getProduct()
   }
 }
 </script>
 
 <template>
   <div class="app mt-[20px]">
-    <!-- <button>></button> -->
     <div class="container">
-      <AppTop />
-      <cartMenu />
-
-      <div class="crds-wrp flex flex-wrap justify-center gap-[25px] mt-[20px]">
-        <productCard v-for="item in products" :key="item" :product="item" />
-      </div>
+      <router-view/>
     </div>
   </div>
 </template>

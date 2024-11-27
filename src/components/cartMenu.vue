@@ -25,11 +25,7 @@ export default {
 
   computed: {
     totalPrice() {
-      let total = 0
-      this.store.cart.forEach((el)=> {
-        total += el.price * el.quantity
-      })
-      return total
+      return this.store.cart.reduce((total, el) => total + el.price * el.quantity, 0);
     }
   },
 
@@ -39,17 +35,13 @@ export default {
     },
 
     addQuan(item) {
-            addQuanProduct(item)
-        },
+      addQuanProduct(item)
+    },
 
-        remQuan(item) {
-            remQuantity(item)
-        }
+    remQuan(item) {
+      remQuantity(item)
+    }
   },
-
-  mounted() {
-
-  }
 };
 </script>
 
@@ -107,11 +99,13 @@ export default {
                               </div>
                               <div class="btns-add-and-rem-quan flex items-center gap-[8px] pb-[4px]">
                                 <button
-                                  class="pb-[5px] font-medium text-[25px] rounded-[3px] h-[20px] w-[35px] flex items-center justify-center bg-black text-white active:opacity-80" @click="remQuan(product)">-</button>
+                                  class="pb-[5px] font-medium text-[25px] rounded-[3px] h-[20px] w-[35px] flex items-center justify-center bg-black text-white active:opacity-80"
+                                  @click="remQuan(product)">-</button>
                                 <span class="font-medium text-center text-[15px] w-[20px]">{{ product.quantity
                                   }}</span>
                                 <button
-                                  class="pb-[4px] font-medium text-[20px] active:opacity-80 rounded-[3px] h-[20px] w-[35px] flex items-center justify-center bg-black text-white" @click="addQuan(product)">+</button>
+                                  class="pb-[4px] font-medium text-[20px] active:opacity-80 rounded-[3px] h-[20px] w-[35px] flex items-center justify-center bg-black text-white"
+                                  @click="addQuan(product)">+</button>
                               </div>
                               <div class="flex flex-1 items-end justify-between text-sm">
                                 <p class="text-gray-500">Qty {{ product.quantity }}</p>
@@ -135,13 +129,14 @@ export default {
                     <p class="mt-0.5 text-sm text-gray-500">To'lov paytida hisoblangan mahsulotlar</p>
                     <div class="mt-6">
                       <a href="#"
-                        class="flex items-center justify-center rounded-md border border-transparent bg-black px-6 py-3 text-base font-medium text-white shadow-sm hover:opacity-80">Sotib olish</a>
+                        class="flex items-center justify-center rounded-md border border-transparent bg-black px-6 py-3 text-base font-medium text-white shadow-sm hover:opacity-80">Sotib
+                        olish</a>
                     </div>
                     <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
                       <p>
                         Yoki {{ ' ' }}
                         <button type="button" class="font-medium text-black" @click="store.cartShow = false">
-                           Xarid qilishni davom ettirish
+                          Xarid qilishni davom ettirish
                           <span aria-hidden="true"> &rarr;</span>
                         </button>
                       </p>
