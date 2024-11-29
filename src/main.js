@@ -4,7 +4,7 @@ import './assets/style.css';
 import App from './App.vue';
 import axios from 'axios';
 import router from './router/index';
-import Pagination from "./components/Pagination/Pagination.vue"
+import Pagination from "./components/Pagination/pagination.vue"
 
 const app = createApp(App);
 const pinia = createPinia();
