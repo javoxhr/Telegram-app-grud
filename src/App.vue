@@ -37,7 +37,7 @@ export default {
 </script>
 
 <template>
-  <div class="app bg-red-500 mt-[20px]">
+  <div class="app mt-[20px]">
     <button id="scrollToTop" style="display: none;"
       class="w-[40px] flex items-center justify-center rounded-full fixed right-[13px] bottom-[13px] z-10 pb-[3px]  h-[40px] bg-black text-white font-medium text-[25px]"><img
         src="./assets/images//svg/arrow.svg" alt=""></button>
